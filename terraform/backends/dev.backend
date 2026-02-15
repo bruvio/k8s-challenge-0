@@ -1,0 +1,2 @@
+bucket         = "some-random-name-bruvio-1234-challenge-0"
+dynamodb_table = "some-random-name-bruvio-1234-challenge-0-terraform-lock-table"

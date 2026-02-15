@@ -1,0 +1,76 @@
+[project]
+name = "challenge-0"
+version = "0.1.0"
+description = "a simple project building EKS cluster and something else"
+authors = [{ name = "bruvio", email = "bruno.viola@pm.me" }]
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fastapi>=0.115.8",
+    "uvicorn>=0.34.0",
+    "boto3>=1.36.9",
+    "python-multipart>=0.0.20",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.11.0",
+    "mypy>=1.14.0",
+    "mypy-extensions>=1.0.0",
+    "typing-extensions>=4.12.2",
+    "pre-commit>=4.0.0",
+]
+test = [
+    "pytest>=8.3.4",
+    "pytest-cov>=6.0.0",
+    "coverage>=7.6.10",
+    "httpx>=0.28.1",
+    "moto>=4.0,<5",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+
+[tool.ruff.lint]
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+]
+ignore = [
+    "W605",  # invalid escape sequence
+    "E501",  # line too long (handled by formatter)
+    "E203",  # whitespace before ':'
+]
+
+[tool.ruff.lint.isort]
+known-first-party = ["challenge-0"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.pytest.ini_options]
+python_files = "tests/test_*.py"
+testpaths = ["tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == \"__main__\"",
+]
+
+[tool.coverage.run]
+omit = [
+    "**/config-*.py",
+    "**/config*.py",
+    "tests/*",
+    "tests/**/*.py",
+]
+
+[tool.mypy]
+ignore_missing_imports = true
