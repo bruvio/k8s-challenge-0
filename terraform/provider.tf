@@ -2,14 +2,14 @@
 
 terraform {
   backend "s3" {
-    key     = "prima-sre/terraform.tfstate"
+    key     = "challenge-0/terraform.tfstate"
     region  = "eu-west-2"
     encrypt = true
   }
   required_providers {
     aws = {
-      source = "hashicorp/aws"
-      # version = "~> 5.83.0"
+      source  = "hashicorp/aws"
+      version = "~> 6"
     }
   }
 
@@ -21,8 +21,8 @@ locals {
   project = var.project
   common_tags = {
     Environment = terraform.workspace
-    Project     = local.project
-    Owner       = local.contact
+    Project     = var.project
+    Owner       = var.contact
     ManagedBy   = "Terraform"
   }
 
@@ -31,12 +31,3 @@ locals {
 
 
 data "aws_caller_identity" "current" {}
-
-
-
-
-
-
-
-
-

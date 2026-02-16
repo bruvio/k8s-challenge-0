@@ -1,2 +1,3 @@
-bucket         = "some-random-name-bruvio-1234-challenge-0"
-dynamodb_table = "some-random-name-bruvio-1234-challenge-0-terraform-lock-table"
+
+bucket         = "terraform-state-bucket-546123287190"
+dynamodb_table = "terraform-lock-546123287190"
