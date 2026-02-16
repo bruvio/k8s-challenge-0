@@ -120,7 +120,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     needs: [ruff, pytest, terraform-fmt]
     runs-on: ubuntu-latest
-    environment: production  # add environment protection rules in repo settings
+    # environment: production  # add environment protection rules in repo settings
     permissions:
       contents: read
       id-token: write
