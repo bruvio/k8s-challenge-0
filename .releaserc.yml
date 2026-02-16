@@ -3,11 +3,6 @@ plugins:
   - "@semantic-release/release-notes-generator"
   - "@semantic-release/changelog"
   -
-    - "semantic-release-helm3"
-    -
-      chartPath: "./prima-api/"
-      updateChartVersion: true
-  -
     - "@semantic-release/exec"
     -
       prepareCmd: |
