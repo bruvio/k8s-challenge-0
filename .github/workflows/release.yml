@@ -135,7 +135,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           aws-region: ${{ env.AWS_REGION }}
-          role-to-assume: ${{ secrets.TF_VARS_APPLY_ROLE_ARN }}
+          role-to-assume: ${{ env.TF_VARS_APPLY_ROLE_ARN }}
 
       - name: Terraform Init
         run: terraform init
@@ -143,8 +143,11 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
+      - name: Terraform Plan
+        run: terraform plan -out=tfplan
+
       - name: Terraform Apply
-        run: terraform apply -auto-approve
+        run: terraform apply tfplan
 
   # ──────────────────────────────────────────────
   # Semantic Release (merge to master only)
