@@ -1,7 +1,7 @@
 # Makefile
 
 # Variables
-PYTEST  = pytest --cov prima_sre --cov-append --cov-report=html -v $(OPTS)
+PYTEST  = pytest --cov app --cov-append --cov-report=html -v $(OPTS)
 TERRAFORM_DIR ?= ./terraform
 ENV ?= dev
 VERSION ?= latest

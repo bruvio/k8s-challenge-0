@@ -5,7 +5,7 @@ description = "a simple project building EKS cluster and something else"
 authors = [{ name = "bruvio", email = "bruno.viola@pm.me" }]
 license = "MIT"
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.13"
 dependencies = [
     "fastapi>=0.115.8",
     "uvicorn>=0.34.0",
