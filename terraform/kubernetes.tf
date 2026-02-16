@@ -35,8 +35,8 @@ locals {
 # EKS Module
 ################################################################################
 module "eks" {
-  source  = "terraform-aws-modules/eks/aws"
-  count   = var.create_cluster ? 1 : 0
+  source = "terraform-aws-modules/eks/aws"
+  count  = var.create_cluster ? 1 : 0
 
   cluster_name                   = var.project
   cluster_version                = local.cluster_version
