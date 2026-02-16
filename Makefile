@@ -50,11 +50,11 @@ check: format_check lint mypy  ## run all code quality checks
 ##
 
 unit:  ## run unit tests
-	uv run pytest -vvv -rPxf --cov=. --cov-append --cov-report term-missing tests
+	uv run --group test pytest -vvv -rPxf --cov=. --cov-append --cov-report term-missing tests
 
 coverage:  ## coverage report
-	uv run coverage report --fail-under 90
-	uv run coverage html -i
+	uv run --group test coverage report --fail-under 90
+	uv run --group test coverage html -i
 
 pytest: unit coverage  ## run all tests and test coverage
 
