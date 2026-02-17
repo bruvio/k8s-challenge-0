@@ -18,6 +18,7 @@ permissions:
 env:
   TF_WORKING_DIR: terraform  # adjust to your terraform directory
   AWS_REGION: eu-west-2       # adjust to your region
+  TF_ENV: dev                 # environment for backend config and tfvars
 
 jobs:
   # ──────────────────────────────────────────────
@@ -81,15 +82,20 @@ jobs:
           role-to-assume: ${{ vars.TF_VARS_PLAN_ROLE_ARN }}  # preferred over static keys
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -backend-config=./backends/${{ env.TF_ENV }}.backend -reconfigure
 
       - name: Terraform Validate
         run: terraform validate
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color -out=tfplan 2>&1 | tee /tmp/plan.txt
-          echo "exit_code=${PIPESTATUS[0]}" >> $GITHUB_OUTPUT
+        run: |
+          set +e
+          terraform plan -var-file=dev.tfvars -no-color -out=tfplan > /tmp/plan.txt 2>&1
+          PLAN_EXIT=$?
+          set -e
+          cat /tmp/plan.txt
+          echo "exit_code=${PLAN_EXIT}" >> $GITHUB_OUTPUT
         continue-on-error: true
 
       - name: Post Plan to PR
@@ -128,7 +134,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
     needs: [ruff, pytest, terraform-fmt]
     runs-on: ubuntu-latest
-    environment: production  # add environment protection rules in repo settings
+    # environment: production  # add environment protection rules in repo settings
     permissions:
       contents: read
       id-token: write
@@ -147,13 +153,13 @@ jobs:
           role-to-assume: ${{ vars.TF_VARS_APPLY_ROLE_ARN }}
 
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -backend-config=./backends/${{ env.TF_ENV }}.backend -reconfigure
 
       - name: Terraform Validate
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan -out=tfplan
+        run: terraform plan -var-file=${{ env.TF_ENV }}.tfvars -out=tfplan
 
       - name: Terraform Apply
         run: terraform apply tfplan

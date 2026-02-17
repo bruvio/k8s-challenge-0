@@ -12,17 +12,6 @@ output "terraform_state_bucket_arn" {
   value       = aws_s3_bucket.terraform_state.arn
 }
 
-output "avatars_bucket_name" {
-  description = "Name of the S3 bucket used for storing avatars"
-  value       = aws_s3_bucket.avatars.bucket
-}
-
-output "avatars_bucket_arn" {
-  description = "ARN of the S3 bucket used for storing avatars"
-  value       = aws_s3_bucket.avatars.arn
-}
-
-
 ###########################
 # DynamoDB Tables
 ###########################
@@ -35,36 +24,6 @@ output "terraform_lock_table_name" {
 output "terraform_lock_table_arn" {
   description = "ARN of the DynamoDB table used to lock Terraform state"
   value       = aws_dynamodb_table.terraform_lock.arn
-}
-
-output "users_table_name" {
-  description = "Name of the DynamoDB table used for storing user data"
-  value       = aws_dynamodb_table.users.name
-}
-
-output "users_table_arn" {
-  description = "ARN of the DynamoDB table used for storing user data"
-  value       = aws_dynamodb_table.users.arn
-}
-
-
-###########################
-# IAM Resources
-###########################
-
-output "api_role_name" {
-  description = "Name of the IAM role for the FastAPI application"
-  value       = aws_iam_role.api_role.name
-}
-
-output "api_role_arn" {
-  description = "ARN of the IAM role for the FastAPI application"
-  value       = aws_iam_role.api_role.arn
-}
-
-output "api_policy_arn" {
-  description = "ARN of the IAM policy attached to the FastAPI role"
-  value       = aws_iam_policy.api_policy.arn
 }
 
 ###########################

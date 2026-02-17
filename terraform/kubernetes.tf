@@ -35,12 +35,13 @@ locals {
 # EKS Module
 ################################################################################
 module "eks" {
-  source = "terraform-aws-modules/eks/aws"
-  count  = var.create_cluster ? 1 : 0
+  source  = "terraform-aws-modules/eks/aws"
+  version = "~> 21.0"
+  count   = var.create_cluster ? 1 : 0
 
-  cluster_name                   = var.project
-  cluster_version                = local.cluster_version
-  cluster_endpoint_public_access = true
+  name                   = var.project
+  kubernetes_version     = local.cluster_version
+  endpoint_public_access = true
 
   enable_cluster_creator_admin_permissions = true
 
