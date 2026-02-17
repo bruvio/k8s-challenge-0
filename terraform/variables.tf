@@ -1,18 +1,5 @@
 
-#
-variable "terraform_state_bucket_name" {
-  description = "Bucket for storing the Terraform *.tfstate files."
-  type        = string
-  default     = "some-random-name-bruvio-1234-prima"
-}
 
-variable "env" {}
-
-variable "terraform_lock_table_name" {
-  description = "DynamoDB table used to lock Terraform state."
-  type        = string
-  default     = "some-random-name-bruvio-1234-prima-terraform-lock-table"
-}
 
 #
 
