@@ -1,32 +1,4 @@
 ###########################
-# S3 Buckets
-###########################
-
-output "terraform_state_bucket_name" {
-  description = "Name of the S3 bucket that stores Terraform state"
-  value       = aws_s3_bucket.terraform_state.bucket
-}
-
-output "terraform_state_bucket_arn" {
-  description = "ARN of the S3 bucket that stores Terraform state"
-  value       = aws_s3_bucket.terraform_state.arn
-}
-
-###########################
-# DynamoDB Tables
-###########################
-
-output "terraform_lock_table_name" {
-  description = "Name of the DynamoDB table used to lock Terraform state"
-  value       = aws_dynamodb_table.terraform_lock.name
-}
-
-output "terraform_lock_table_arn" {
-  description = "ARN of the DynamoDB table used to lock Terraform state"
-  value       = aws_dynamodb_table.terraform_lock.arn
-}
-
-###########################
 # K8S Resources
 ###########################
 ################################################################################
